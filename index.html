@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jake Junior / Jake Senior Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-theme="desktop90s">
+  <main class="app-shell" aria-label="Simulated chat interface">
+    <header class="app-header">
+      <div class="window-dots" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <h1>Jake Chat Relay</h1>
+      <label class="theme-control" for="themeSelect">
+        Style
+        <select id="themeSelect" aria-label="Select chat style">
+          <option value="desktop90s">90s Desktop</option>
+          <option value="terminalBbs">Terminal/BBS</option>
+        </select>
+      </label>
+    </header>
+
+    <section class="chat-window" aria-live="polite" aria-label="Chat transcript">
+      <ul id="chatTranscript" class="transcript"></ul>
+    </section>
+
+    <footer class="status-bar" aria-label="Conversation status">
+      <span>Connection: Stable</span>
+      <span>Participants: Jake Junior, Jake Senior</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
