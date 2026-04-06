@@ -1,16 +1,13 @@
 const transcriptEl = document.getElementById("chatTranscript");
 const themeSelectEl = document.getElementById("themeSelect");
 
-const users = {
-  "Jake Senior": "Jake Junior",
-  "Jake Junior": "Jake Senior",
-};
+const speakers = ["Jake Senior", "Jake Junior"];
 
-let currentSpeaker = "Jake Senior";
+let currentSpeakerIndex = 0;
 
 function randomDelayMs() {
   const min = 1000;
-  const max = 15000;
+  const max = 10000;
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -40,22 +37,19 @@ function appendMessage(speaker, text) {
 }
 
 function postNextMessage() {
-  const messageText = users[currentSpeaker];
-  appendMessage(currentSpeaker, messageText);
-  currentSpeaker =
-    currentSpeaker === "Jake Senior" ? "Jake Junior" : "Jake Senior";
+  const speaker = speakers[currentSpeakerIndex];
+  const messageText = speakers[(currentSpeakerIndex + 1) % speakers.length];
+
+  appendMessage(speaker, messageText);
+  currentSpeakerIndex = (currentSpeakerIndex + 1) % speakers.length;
 
   const nextDelay = randomDelayMs();
   window.setTimeout(postNextMessage, nextDelay);
 }
 
-function applyTheme(themeName) {
-  document.body.dataset.theme = themeName;
-}
-
 themeSelectEl.addEventListener("change", (event) => {
-  applyTheme(event.target.value);
+  document.body.dataset.theme = event.target.value;
 });
 
-applyTheme(themeSelectEl.value);
+document.body.dataset.theme = themeSelectEl.value;
 postNextMessage();
